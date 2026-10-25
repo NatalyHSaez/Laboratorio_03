@@ -142,14 +142,14 @@ Archivo: `Gramatica_Lab3_extension.jff`
 
 Árbol de derivación de `z = x + y #` (`i=i+i#`), pregunta 3:
 
-![Árbol pregunta 3](arbol_jflap.jpg)
+![Árbol pregunta 3](GramLab3.png)
 
 Árbol de derivación de `si x > 10 entonces salida x # fin_si` (`ci>ntsi#f`), extensión:
 
-![Árbol extensión](arbol_extension.jpg)
+![Árbol extensión](Arbol_extension.png)
 
 Rechazo de `si x > 10 entonces salida x #` (`ci>ntsi#`), por falta de `fin_si`:
 
-![Rechazo extensión](rechazo_extension.jpg)
+![Rechazo extensión](Rechazo_extension.png)
 
 ---
