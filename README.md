@@ -5,7 +5,7 @@
 **Docente:** Marcos Lévano
 **Integrantes:** Nataly Huaiquinao, Diego Sanhueza
 
-Este repositorio contiene los archivos de **JFLAP** usados en el Laboratorio 3. En ellos se ingresó la Gramática Libre de Contexto (GLC) diseñada para el lenguaje de programación simplificado del laboratorio, y se usaron para generar los árboles de derivación y validar las cadenas del informe.
+Este repositorio contiene los archivos de **JFLAP** usados en el Laboratorio 3. En ellos se ingresó la Gramática de Libre Contexto (GLC) diseñada para el lenguaje de programación simplificado del laboratorio, y se usaron para generar los árboles de derivación y validar las cadenas del informe.
 
 ---
 
@@ -13,14 +13,12 @@ Este repositorio contiene los archivos de **JFLAP** usados en el Laboratorio 3. 
 
 | Archivo | Contenido | Símbolo inicial |
 |---|---|---|
-| `Gramatica_Lab3.jff` | Gramática base (producciones P1 a P16) | `P` (programa) |
-| `Gramatica_Lab3_instruccion.jff` | Gramática base, con las producciones de `I` al inicio | `I` (instrucción) |
-| `Gramatica_Lab3_extension.jff` | Gramática base + extensión condicional (P1 a P25) | `P` (programa) |
-| `Gramatica_Lab3_extension_instruccion.jff` | Gramática extendida, con las producciones de `I` al inicio | `I` (instrucción) |
+| `Gramatica_Lab3_Arbol_pregunta_3.jff` | Gramática base (producciones P1 a P16) | `I` (instrucción) |
+| `Gramatica_Lab3_extension.jff` | Gramática base + extensión condicional (P1 a P25) | `I` (instrucción) |
 
-JFLAP toma como símbolo inicial el lado izquierdo de la **primera producción**. Por eso hay dos versiones de cada gramática:
-- **Las que parten en `P`** sirven para probar programas completos (`Begin … End`).
-- **Las que parten en `I`** sirven para probar instrucciones sueltas, como `z = x + y #`, que son las cadenas de las preguntas 3 y 4.
+JFLAP toma como símbolo inicial el lado izquierdo de la **primera producción**. En ambos archivos la primera producción es de `I`, por lo que sirven para probar **instrucciones sueltas**, como `z = x + y #`, que son las cadenas de las preguntas 3 y 4 y de la extensión.
+
+Para probar un **programa completo** (`Begin … End`, caso 8 de la pregunta 4), hay que mover la producción `P → bpiLe` a la primera fila en el editor de JFLAP, para que el símbolo inicial sea `P`.
 
 ---
 
@@ -106,7 +104,7 @@ I → C       C → cKtLf       K → OQO       Q → >  |  <  |  >=  |  <=  |  
 ## Cadenas de prueba
 
 ### Pregunta 3 – Derivaciones y árbol
-Archivo: `Gramatica_Lab3_instruccion.jff`
+Archivo: `Gramatica_Lab3_Arbol_pregunta_3.jff`
 
 | Cadena original | En JFLAP | Resultado |
 |---|---|---|
@@ -117,7 +115,7 @@ Archivo: `Gramatica_Lab3_instruccion.jff`
 | `salida temporal #` | `si#` | Aceptada |
 
 ### Pregunta 4 – Validación y detección de errores
-Archivo: `Gramatica_Lab3_instruccion.jff` (casos 1 a 7) y `Gramatica_Lab3.jff` (caso 8)
+Archivo: `Gramatica_Lab3_Arbol_pregunta_3.jff`. Para el caso 8, mover antes `P → bpiLe` a la primera fila.
 
 | Caso | Cadena original | En JFLAP | Resultado | Error |
 |---|---|---|---|---|
@@ -131,7 +129,7 @@ Archivo: `Gramatica_Lab3_instruccion.jff` (casos 1 a 7) y `Gramatica_Lab3.jff` (
 | 8 | `Begin Programa prueba x = 5 # salida x # End` | `bpii=n#si#e` | Aceptada | – |
 
 ### Extensión – Condicional
-Archivo: `Gramatica_Lab3_extension_instruccion.jff`
+Archivo: `Gramatica_Lab3_extension.jff`
 
 | Cadena original | En JFLAP | Resultado | Error |
 |---|---|---|---|
@@ -140,8 +138,18 @@ Archivo: `Gramatica_Lab3_extension_instruccion.jff`
 
 ---
 
-## Notas
+## Evidencias
 
-- Los identificadores y los números se representan con los terminales genéricos `i` (`id`) y `n` (`num`), porque forman conjuntos infinitos y su forma la reconoce el analizador léxico, no la gramática.
-- Los espacios y los comentarios (`/* … */`) se descartan en el análisis léxico, por eso las cadenas se escriben sin espacios en JFLAP.
-- La explicación completa de la gramática, las derivaciones y la validación de cadenas está en el informe del laboratorio.
+Árbol de derivación de `z = x + y #` (`i=i+i#`), pregunta 3:
+
+![Árbol pregunta 3](arbol_jflap.jpg)
+
+Árbol de derivación de `si x > 10 entonces salida x # fin_si` (`ci>ntsi#f`), extensión:
+
+![Árbol extensión](arbol_extension.jpg)
+
+Rechazo de `si x > 10 entonces salida x #` (`ci>ntsi#`), por falta de `fin_si`:
+
+![Rechazo extensión](rechazo_extension.jpg)
+
+---
